@@ -20,6 +20,7 @@ repositories {
     mavenCentral()
 }
 
+/*
 configure<PublishingExtension> {
     publications {
         create<MavenPublication>("default") {
@@ -42,6 +43,8 @@ configure<PublishingExtension> {
     }
 }
 
+ */
+
 dependencies {
     testImplementation(kotlin("test"))
     testImplementation("org.junit.jupiter:junit-jupiter:5.9.2")
@@ -55,5 +58,24 @@ tasks.test {
 tasks.withType<KotlinCompile> {
     kotlin {
         jvmToolchain(17)
+    }
+}
+
+
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/Rognlien/cache")
+            credentials {
+                username = project.findProperty("gpr.user") as String? ?: System.getenv("USERNAME")
+                password = project.findProperty("gpr.key") as String? ?: System.getenv("TOKEN")
+            }
+        }
+    }
+    publications {
+        register<MavenPublication>("gpr") {
+            from(components["java"])
+        }
     }
 }
