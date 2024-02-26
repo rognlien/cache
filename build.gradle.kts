@@ -1,4 +1,4 @@
-import org.gradle.api.publish.PublishingExtension
+
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 
@@ -60,7 +60,6 @@ tasks.withType<KotlinCompile> {
         jvmToolchain(17)
     }
 }
-
 
 publishing {
     repositories {
