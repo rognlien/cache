@@ -1,4 +1,3 @@
-
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 
@@ -10,40 +9,11 @@ plugins {
 }
 
 group = "com.rognlien"
-version = "0.0.1-SNAPSHOT"
-
-val baseVersion = property("baseVersion")
-val buildNumber: String? = System.getenv("BUILD_NUMBER")
-version = buildNumber?.let { "$baseVersion.$buildNumber" } ?: "$baseVersion.local"
+version = "0.0.1"
 
 repositories {
     mavenCentral()
 }
-
-/*
-configure<PublishingExtension> {
-    publications {
-        create<MavenPublication>("default") {
-            groupId = "com.rognlien"
-            artifactId = "cache"
-            from(components["java"])
-            // Include any other artifacts here, like javadocs
-        }
-    }
-
-    repositories {
-        maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/rognlien/" + rootProject.name)
-            credentials {
-                username = System.getenv("GITHUB_ACTOR")
-                password = System.getenv("GITHUB_TOKEN")
-            }
-        }
-    }
-}
-
- */
 
 dependencies {
     testImplementation(kotlin("test"))
