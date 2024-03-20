@@ -5,7 +5,7 @@ import java.time.Instant
 import java.time.Instant.now
 import java.util.Collections.synchronizedMap
 
-class TLRUCache<K, T>(val capacity: Int, val ttl: Duration = Duration.ofMinutes(10)) : Cache<K, T> {
+class TLRUCache<K, T> @JvmOverloads constructor (val capacity: Int, private val ttl: Duration = Duration.ofMinutes(10)) : Cache<K, T> {
 
     private data class Entry<T>(val expires: Instant, val value: T) {
         val expired: Boolean get() = expires.isBefore(now())
@@ -16,6 +16,10 @@ class TLRUCache<K, T>(val capacity: Int, val ttl: Duration = Duration.ofMinutes(
     })
 
     override fun put(key: K, value: T) {
+        put(key, value, ttl)
+    }
+
+    override fun put(key: K, value: T, ttl: Duration) {
         cache[key] = Entry(now().plus(ttl), value)
     }
 

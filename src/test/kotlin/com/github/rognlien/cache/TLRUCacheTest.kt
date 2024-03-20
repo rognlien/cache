@@ -1,7 +1,8 @@
 package com.github.rognlien.cache
 
-import org.junit.jupiter.api.Test
+
 import java.time.Duration
+import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
 
